@@ -1,5 +1,6 @@
 package com.projetodw.demo.layers.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,15 @@ import com.projetodw.demo.layers.repositories.ServicoRepository;
 public class RequisicaoService {
     @Autowired
     ServicoRepository servicoRepository;
+    @Autowired
     EquipamentoRepository equipamentoRepository;
+    @Autowired
     ClienteRepository clienteRepository;
+    @Autowired
     RequisicaoRepository requisicaoRepository;
+    @Autowired
     RequisicaoEquipamentoRepository requisicaoequipamentoRepository;
+    @Autowired
     RequisicaoServicoRepository requisicaoservicoRepository;
 
     public Requisicao GetRequisicao(Long idRequisicao) throws ValidacaoException{
@@ -33,26 +39,43 @@ public class RequisicaoService {
 
         return requisicao.get();
     }
+
+    public List<RequisicaoEquipamento> GetRequisicaoEquipamentoByRequisicaoId(Long idRequisicao) throws ValidacaoException{
+        List<RequisicaoEquipamento> requisicaoequipamento = requisicaoequipamentoRepository.findByRequisicaoId(idRequisicao);
+
+        if (requisicaoequipamento.isEmpty()) {
+            throw new ValidacaoException("Nenhuma RequisicaoEquipamento encontrada com ID " + idRequisicao);
+        }
+
+        return requisicaoequipamento;
+    }
+
+    public List<RequisicaoServico> GetRequisicaoServicoByRequisicaoId(Long idRequisicao) throws ValidacaoException{
+        List<RequisicaoServico> requisicaoservico = requisicaoservicoRepository.findByRequisicaoId(idRequisicao);
+
+    
+        if (requisicaoservico.isEmpty()) {
+            throw new ValidacaoException("Nenhuma RequisicaoServico encontrada com ID " + idRequisicao);
+        }
+
+        return requisicaoservico;
+    }
     
     public Requisicao cadastrarRequisicao(Requisicao requisicao) throws ValidacaoException{
         if(requisicao.getId() != null) {
             throw new ValidacaoException("ID nao nulo");
         }
 
-        if(requisicao.getCliente() == null) {
+        if(requisicao.getDataAbertura() == null){
+            throw new ValidacaoException("data invalida");
+        }
+
+        if(requisicao.getCliente() == null || requisicao.getCliente().getId() == null) {
             throw new ValidacaoException("Id do Cliente inválido");
         }
 
         if(!clienteRepository.existsById(requisicao.getCliente().getId())){
             throw new ValidacaoException("Cliente com ID " + requisicao.getCliente().getId() + " não encontrado.");
-        }
-
-        if(requisicao.getTecnico() == null) {
-            throw new ValidacaoException("Id do Tecnico inválido");
-        }
-
-        if(!clienteRepository.existsById(requisicao.getTecnico().getId())){
-            throw new ValidacaoException("Tecnico com ID " + requisicao.getTecnico().getId() + " não encontrado.");
         }
 
         return requisicaoRepository.save(requisicao);
@@ -65,7 +88,7 @@ public class RequisicaoService {
         }
 
         if(requisicaoequipamento.getRequisicao() == null) {
-            throw new ValidacaoException("Id do Requisicao inválido");
+            throw new ValidacaoException("Id da Requisicao inválido");
         }
 
         if(!requisicaoRepository.existsById(requisicaoequipamento.getRequisicao().getId())){
@@ -133,14 +156,6 @@ public class RequisicaoService {
 
         if(!clienteRepository.existsById(requisicao.getCliente().getId())){
             throw new ValidacaoException("Cliente com ID " + requisicao.getCliente().getId() + " não encontrado.");
-        }
-
-        if(!clienteRepository.existsById(requisicao.getTecnico().getId())){
-            throw new ValidacaoException("Id do Tecnico inválido");
-        }
-
-        if(!clienteRepository.existsById(requisicao.getTecnico().getId())){
-            throw new ValidacaoException("Tecnico com ID " + requisicao.getTecnico().getId() + " não encontrado.");
         }
 
         return requisicaoRepository.save(requisicao);

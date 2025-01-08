@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.projetodw.demo.layers.entities.Requisicao;
 
 @Repository
-public interface RequisicaoRepository extends JpaRepository<Requisicao, Long> {
-    
+public interface RequisicaoRepository extends JpaRepository<Requisicao, Long> { 
+
 }

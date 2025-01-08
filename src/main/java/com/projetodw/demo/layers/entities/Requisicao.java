@@ -28,11 +28,7 @@ public class Requisicao {
     @ManyToOne
     @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
-
-    @ManyToOne
-    @JoinColumn(name = "tecnico_id", nullable = false)
-    private Tecnico tecnico;
-    
+     
     public Long getId() {
         return id;
     }
@@ -63,14 +59,6 @@ public class Requisicao {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
-    }
-
-    public Tecnico getTecnico() {
-        return tecnico;
-    }
-
-    public void setTecnico(Tecnico tecnico) {
-        this.tecnico = tecnico;
     }
 
 }

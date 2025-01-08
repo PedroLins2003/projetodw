@@ -17,6 +17,12 @@ public class ClienteService {
     @Autowired
     ClienteRepository clienteRepository;
 
+    public Cliente GetCliente(Long idCliente) throws ValidacaoException{
+        Optional<Cliente> cliente = clienteRepository.findById(idCliente);
+
+        return cliente.get();
+    }
+
     public Cliente cadastrarCliente(Cliente cliente) throws ValidacaoException {
 
         if(cliente.getId() != null) {
@@ -35,11 +41,11 @@ public class ClienteService {
             throw new ValidacaoException("Nome inválido");
         }
 
-        if(!NTelefoneValidator.isValidNtelefone(cliente.gettelefone())){
+        if(!NTelefoneValidator.isValidNtelefone(cliente.getTelefone())){
             throw new ValidacaoException("Numero de telefone inválido");
         }
 
-        if(clienteRepository.existsByTelefone(cliente.gettelefone())){
+        if(clienteRepository.existsByTelefone(cliente.getTelefone())){
             throw new ValidacaoException("Telefone já registrado");
         }
 
@@ -65,11 +71,11 @@ public class ClienteService {
             throw new ValidacaoException("Nome inválido");
         }
 
-        if(!NTelefoneValidator.isValidNtelefone(cliente.gettelefone())){
+        if(!NTelefoneValidator.isValidNtelefone(cliente.getTelefone())){
             throw new ValidacaoException("Numero de telefone inválido");
         }
 
-        if(clienteRepository.existsByTelefone(cliente.gettelefone())){
+        if(clienteRepository.existsByTelefone(cliente.getTelefone())){
             throw new ValidacaoException("Telefone já registrado");
         }
 

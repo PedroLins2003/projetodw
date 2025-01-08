@@ -13,29 +13,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projetodw.demo.exceptions.ValidacaoException;
-import com.projetodw.demo.layers.entities.Requisicao;
+import com.projetodw.demo.layers.entities.RequisicaoServico;
 import com.projetodw.demo.layers.services.RequisicaoService;
 
 @RestController
-@RequestMapping("/requisicao")
-public class RequisicaoController {
+@RequestMapping("/requisicaoservico")
+public class RequisicaoServicoController {
     @Autowired
     private RequisicaoService requisicaoService;
 
-    @GetMapping("/{idRequisicao}")
-    public ResponseEntity<?> getRequisicao(@PathVariable Long idRequisicao){
+    @GetMapping("/{idRequisicaoServico}")
+    public ResponseEntity<?> getRequisicaoServicoByRequisicaoId(@PathVariable Long idRequisicaoServico){
         try{
-            requisicaoService.GetRequisicao(idRequisicao);
-            return ResponseEntity.status(HttpStatus.OK).body(requisicaoService.GetRequisicao(idRequisicao));
+            requisicaoService.GetRequisicaoServicoByRequisicaoId(idRequisicaoServico);
+            return ResponseEntity.status(HttpStatus.OK).body(requisicaoService.GetRequisicaoServicoByRequisicaoId(idRequisicaoServico));
         } catch (ValidacaoException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
     @PostMapping
-    public ResponseEntity<?> cadastrarRequisicao(@RequestBody Requisicao requisicao) {
+    public ResponseEntity<?> cadastrarRequisicaoServico(@RequestBody RequisicaoServico requisicaoservico) {
         try {
-            requisicaoService.cadastrarRequisicao(requisicao);
+            requisicaoService.cadastrarRequisicaoServico(requisicaoservico);
             return ResponseEntity.status(HttpStatus.OK).body("{cadastro concluído}");
         } catch (ValidacaoException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -43,20 +43,20 @@ public class RequisicaoController {
     }
 
     @PutMapping
-    public ResponseEntity<?> atualizarRequisicao(@RequestBody Requisicao requisicao) {
+    public ResponseEntity<?> atualizarRequisicaoServico(@RequestBody RequisicaoServico requisicaoservico) {
         try {
-            requisicaoService.atualizarRequisicao(requisicao);
-            return ResponseEntity.status(HttpStatus.OK).body("{Requisicao atualizado}");
+            requisicaoService.atualizarRequisicaoServico(requisicaoservico);
+            return ResponseEntity.status(HttpStatus.OK).body("{RequisicaoServico atualizada}");
         } catch (ValidacaoException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
-    @DeleteMapping("/{idRequisicao}")
-    public ResponseEntity<?> removerRequisicao(@PathVariable Long idRequisicao) {
+    @DeleteMapping("/{idRequisicaoServico}")
+    public ResponseEntity<?> removerRequisicaoServico(@PathVariable Long idRequisicaoServico) {
         try {
-            requisicaoService.removerRequisicao(idRequisicao);
-            return ResponseEntity.status(HttpStatus.OK).body("{Requisicao deletada}");
+            requisicaoService.removerRequisicaoServico(idRequisicaoServico);
+            return ResponseEntity.status(HttpStatus.OK).body("{RequisicaoServico deletada}");
         } catch (ValidacaoException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }

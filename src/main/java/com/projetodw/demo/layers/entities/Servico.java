@@ -7,8 +7,6 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
@@ -33,10 +31,6 @@ public class Servico {
     @Column(nullable = false)
     private String preco;
 
-    @ManyToOne
-    @JoinColumn(name = "requisicao_id", nullable = false)
-    private Requisicao requisicao;
-
     // Getters e Setters
     public Long getId() {
         return id;
@@ -46,11 +40,11 @@ public class Servico {
         this.id = id;
     }
 
-    public ServicoEnum getSituacao() {
+    public ServicoEnum getServico() {
         return servico;
     }
 
-    public void setSituacao(ServicoEnum servico) {
+    public void setServico(ServicoEnum servico) {
         this.servico = servico;
     }
 
@@ -60,13 +54,5 @@ public class Servico {
 
     public void setData(String preco) {
         this.preco = preco;
-    }
-
-    public Requisicao getRequisicao() {
-        return requisicao;
-    }
-
-    public void setRequisicao(Requisicao requisicao) {
-        this.requisicao = requisicao;
     }
 }

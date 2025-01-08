@@ -51,11 +51,11 @@ public class Cliente {
         this.cpf = cpf;
     }
 
-    public String gettelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void settelefone(String telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 }

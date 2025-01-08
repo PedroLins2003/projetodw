@@ -5,8 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
@@ -40,10 +38,6 @@ public class Equipamento {
     @Column
     private String descricao;
 
-    @ManyToOne
-    @JoinColumn(name = "requisicao_id", nullable = false)
-    private Requisicao requisicao;
-
     public Long getId() {
         return id;
     }
@@ -72,15 +66,7 @@ public class Equipamento {
         return descricao;
     }
 
-    public void setMarca(String descricao) {
+    public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-    
-    public Requisicao getRequisicao() {
-        return requisicao;
-    }
-
-    public void setRequisicao(Requisicao requisicao) {
-        this.requisicao = requisicao;
     }
 }

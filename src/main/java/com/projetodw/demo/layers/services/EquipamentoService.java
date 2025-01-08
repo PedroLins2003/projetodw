@@ -1,6 +1,6 @@
 package com.projetodw.demo.layers.services;
 
-import java.util.Arrays;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.projetodw.demo.exceptions.ValidacaoException;
 import com.projetodw.demo.layers.entities.Equipamento;
-import com.projetodw.demo.layers.entities.Equipamento.MarcaEnum;
-import com.projetodw.demo.layers.entities.Equipamento.TipoEnum;
 import com.projetodw.demo.layers.repositories.EquipamentoRepository;
 
 
@@ -18,22 +16,10 @@ public class EquipamentoService {
     @Autowired
     EquipamentoRepository equipamentoRepository;
 
-    public void validarTipoEquipamento(Equipamento equipamento) throws ValidacaoException {
-        boolean tipoValido = Arrays.stream(TipoEnum.values())
-                .anyMatch(tipo -> tipo == equipamento.getTipo());
-    
-        if (!tipoValido) {
-            throw new ValidacaoException("Tipo não listado");
-        }
-    }
+    public Equipamento GetEquipamento(Long idEquipamento) throws ValidacaoException{
+        Optional<Equipamento> equipamento = equipamentoRepository.findById(idEquipamento);
 
-    public void validarMarcaEquipamento(Equipamento equipamento) throws ValidacaoException {
-        boolean tipoValido = Arrays.stream(MarcaEnum.values())
-                .anyMatch(tipo -> tipo == equipamento.getMarca());
-    
-        if (!tipoValido) {
-            throw new ValidacaoException("Tipo não listado");
-        }
+        return equipamento.get();
     }
     
     
@@ -42,15 +28,11 @@ public class EquipamentoService {
         if(equipamento.getId() != null) {
             throw new ValidacaoException("ID nao nulo");
         }
-
-        if(equipamento.getTipo() == null) {
-            throw new ValidacaoException("Informe o tipo do equipamento");
+    
+        if (equipamento == null || equipamento.getTipo() == null) {
+            throw new ValidacaoException("Insira um tipo de equipamento");
         }
     
-        validarTipoEquipamento(equipamento);
-
-        validarMarcaEquipamento(equipamento);
-        
         return equipamentoRepository.save(equipamento);
     }
 
@@ -64,10 +46,6 @@ public class EquipamentoService {
         if(_equipamento.isEmpty()) {
             throw new ValidacaoException("ID não existe");
         }
-
-        validarTipoEquipamento(equipamento);
-
-        validarMarcaEquipamento(equipamento);
 
         return equipamentoRepository.save(equipamento);
     }
