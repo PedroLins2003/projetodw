@@ -22,6 +22,10 @@ public class ClienteService {
         if(cliente.getId() != null) {
             throw new ValidacaoException("ID nao nulo");
         }
+        
+        if(clienteRepository.existsByCpf(cliente.getCpf())){
+            throw new ValidacaoException("CPF já registrado");
+        }
 
         if(!CPFValidator.isValidCPF(cliente.getCpf())) {
             throw new ValidacaoException("CPF inválido");
@@ -33,6 +37,10 @@ public class ClienteService {
 
         if(!NTelefoneValidator.isValidNtelefone(cliente.gettelefone())){
             throw new ValidacaoException("Numero de telefone inválido");
+        }
+
+        if(clienteRepository.existsByTelefone(cliente.gettelefone())){
+            throw new ValidacaoException("Telefone já registrado");
         }
 
         return clienteRepository.save(cliente);
@@ -59,6 +67,10 @@ public class ClienteService {
 
         if(!NTelefoneValidator.isValidNtelefone(cliente.gettelefone())){
             throw new ValidacaoException("Numero de telefone inválido");
+        }
+
+        if(clienteRepository.existsByTelefone(cliente.gettelefone())){
+            throw new ValidacaoException("Telefone já registrado");
         }
 
         return clienteRepository.save(cliente);

@@ -21,9 +21,22 @@ public class WebConfig  {
             .authorizeHttpRequests(authorizeConfig ->
                 authorizeConfig
                     .requestMatchers(HttpMethod.POST,"/clientes").permitAll()
+                    .requestMatchers(HttpMethod.POST,"/equipamento").permitAll()
+                    .requestMatchers(HttpMethod.POST,"/requisicao").permitAll()
+                    .requestMatchers(HttpMethod.POST,"/requisicaoequipamento").permitAll()
+                    .requestMatchers(HttpMethod.POST,"/requisicaoservico").permitAll()
                     .requestMatchers(HttpMethod.PUT,"/clientes").permitAll()
+                    .requestMatchers(HttpMethod.PUT,"/equipamento").permitAll()
+                    .requestMatchers(HttpMethod.PUT,"/requisicao").permitAll()
+                    .requestMatchers(HttpMethod.PUT,"/requisicaoequipamento").permitAll()
+                    .requestMatchers(HttpMethod.PUT,"/requisicaoservico").permitAll()
                     .requestMatchers(HttpMethod.DELETE,"/clientes/{id:[0-9]+}").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/compras/{nome:.*}").permitAll()
+                    .requestMatchers(HttpMethod.DELETE,"/equipamento/{id:[0-9]+}").permitAll()
+                    .requestMatchers(HttpMethod.DELETE,"/requisicao/{id:[0-9]+}").permitAll()
+                    .requestMatchers(HttpMethod.DELETE,"/requisicaoequipamento/{id:[0-9]+}").permitAll()
+                    .requestMatchers(HttpMethod.DELETE,"/requisicaoservico/{id:[0-9]+}").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/requisicao/{id:[0-9]+}").permitAll()
+                    .anyRequest().authenticated()
 
                 
             ).build();

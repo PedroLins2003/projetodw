@@ -7,5 +7,9 @@ import com.projetodw.demo.layers.entities.Cliente;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
+    boolean existsByCpf(String cpf);
 
+    boolean existsByTelefone(String telefone);
+
+    boolean existsById(Long id);
 }

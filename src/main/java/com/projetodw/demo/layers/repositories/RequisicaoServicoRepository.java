@@ -8,4 +8,6 @@ import com.projetodw.demo.layers.entities.RequisicaoServico;
 @Repository
 public interface RequisicaoServicoRepository extends JpaRepository<RequisicaoServico, Long> {
 
+    void deleteByRequisicaoId(Long idRequisicao);
+
 }

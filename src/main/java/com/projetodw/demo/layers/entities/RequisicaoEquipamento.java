@@ -15,6 +15,9 @@ public class RequisicaoEquipamento {
     @Column(name = "id")
     private Long id;
 
+    @Column(nullable = false)
+    private Integer quantidade;
+
     @ManyToOne
     @JoinColumn(name = "requisicao_id", nullable = false)
     private Requisicao requisicao;
@@ -29,6 +32,14 @@ public class RequisicaoEquipamento {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
     }
 
     public Requisicao getRequisicao() {

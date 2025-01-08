@@ -12,21 +12,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projetodw.demo.exceptions.ValidacaoException;
-import com.projetodw.demo.layers.entities.Cliente;
-import com.projetodw.demo.layers.services.ClienteService;
+import com.projetodw.demo.layers.entities.Equipamento;
+import com.projetodw.demo.layers.services.EquipamentoService;
 
 @RestController
-@RequestMapping("/clientes")
-public class ClienteController {
-
+@RequestMapping("/equipamento")
+public class EquipamentoController {
     @Autowired
-    private ClienteService clienteService;
+    private EquipamentoService equipamentoService;
 
     // Endpoint para cadastrar um novo cliente
     @PostMapping
-    public ResponseEntity<?> cadastrarCliente(@RequestBody Cliente cliente) {
+    public ResponseEntity<?> cadastrarEquipamento(@RequestBody Equipamento equipamento) {
         try {
-            clienteService.cadastrarCliente(cliente);
+            equipamentoService.cadastrarEquipamento(equipamento);
             return ResponseEntity.status(HttpStatus.OK).body("{cadastro concluído}");
         } catch (ValidacaoException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -34,20 +33,20 @@ public class ClienteController {
     }
 
     @PutMapping
-    public ResponseEntity<?> atualizarCliente(@RequestBody Cliente cliente) {
+    public ResponseEntity<?> atualizarEquipamento(@RequestBody Equipamento equipamento) {
         try {
-            clienteService.atualizarCliente(cliente);
-            return ResponseEntity.status(HttpStatus.OK).body("{}");
+            equipamentoService.atualizarEquipamento(equipamento);
+            return ResponseEntity.status(HttpStatus.OK).body("{Equipamento atualizado}");
         } catch (ValidacaoException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
-    @DeleteMapping("/{idCliente}")
-    public ResponseEntity<?> removerCliente(@PathVariable Long idCliente) {
+    @DeleteMapping("/{idEquipamento}")
+    public ResponseEntity<?> removerEquipamento(@PathVariable Long idEquipamento) {
         try {
-            clienteService.removerCliente(idCliente);
-            return ResponseEntity.status(HttpStatus.OK).body("{}");
+            equipamentoService.removerEquipamento(idEquipamento);
+            return ResponseEntity.status(HttpStatus.OK).body("{Equipamento deletado}");
         } catch (ValidacaoException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }

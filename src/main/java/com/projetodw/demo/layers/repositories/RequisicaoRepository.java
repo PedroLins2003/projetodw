@@ -7,5 +7,5 @@ import com.projetodw.demo.layers.entities.Requisicao;
 
 @Repository
 public interface RequisicaoRepository extends JpaRepository<Requisicao, Long> {
-
+    
 }

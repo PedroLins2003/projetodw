@@ -30,7 +30,7 @@ public class Requisicao {
     private Cliente cliente;
 
     @ManyToOne
-    @JoinColumn(name = "tecnico_id")
+    @JoinColumn(name = "tecnico_id", nullable = false)
     private Tecnico tecnico;
     
     public Long getId() {

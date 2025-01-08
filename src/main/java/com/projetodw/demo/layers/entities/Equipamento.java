@@ -17,11 +17,14 @@ public class Equipamento {
 
     public enum TipoEnum {
         NOTBOOK,
-        PC_DE_MESA
+        PC_DE_MESA,
+        IMPRESSORA
     }
 
     public enum MarcaEnum {
-        SAMSUNG
+        SAMSUNG,
+        APPLE,
+        LENOVO,
     }
 
     @Id
@@ -33,6 +36,9 @@ public class Equipamento {
 
     @Column
     private MarcaEnum marca;
+
+    @Column
+    private String descricao;
 
     @ManyToOne
     @JoinColumn(name = "requisicao_id", nullable = false)
@@ -54,12 +60,20 @@ public class Equipamento {
         this.tipo = tipo;
     }
 
-    public MarcaEnum getModelo() {
+    public MarcaEnum getMarca() {
         return marca;
     }
 
-    public void setModelo(MarcaEnum marca) {
+    public void setMarca(MarcaEnum marca) {
         this.marca = marca;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setMarca(String descricao) {
+        this.descricao = descricao;
     }
     
     public Requisicao getRequisicao() {
